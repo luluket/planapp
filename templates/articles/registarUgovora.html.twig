@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+{% block title %}Pregled planova nabave {% endblock %}
+{% block body %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/styles/plans.css"/>
+    <link rel="stylesheet" href="/styles/registar.css"/>
+
+    <header>
+        {% if noplan == NULL %}
+            <div class="empty"> PRAZAN REGISTAR UGOVORA</div>
+        {% else %}
+    
+        <div class="note">REGISTAR UGOVORA</div>
+        <select class="list" id="list-user" onchange="getSelectedValueByUser();">
+            <option value="showAll">Pretraži po izvršitelju..</option>
+                {% for user in users %}
+                    <option value="{{user.function}}">{{user.function}}</option>
+                {% endfor %}
+        </select>
+
+        <select class="list" id="list-year" onchange="getSelectedValueByYear();">
+            
+            <option value="showAll">Pretraži po godini..</option>
+
+                <option value="{{year.kalendarskaGodina}}">{{year.kalendarskaGodina}}</option>
+            
+        </select>
+    
+    </header>
+    
+
+                  <table id="{{year.id}}" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Planovi</th>
+                            <th class="year">{{year.kalendarskaGodina}}</th>
+                            <th>Izvršitelj</th>
+                            <th>Opcije</th>
+                            <th>Trošak</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr id="{{user.id}}">
+                            <td> Plan nabave {{year.kalendarskaGodina}} </td>
+                            <td> </td>
+                            <td> <span class="executioner">{{user.function}}</span></td>
+                            <td> <a href="/showPlan/{{user.id}}/{{year.id}}" class="btn btn-dark">Prikaži </a> </td>
+                            <td class="expenses">
+                            
+                                {% if (totalExpenses.sumUserAnnualExpenses(user.id(),year.id)) > 0 %}
+
+                                    {% if status.readStatus(user.id,year.id)=='izvršen' %}
+                                        <div class="autorized">
+                                            <b>{{totalExpenses.sumUserAnnualExpenses(user.id,year.id)}}</b> kn
+                                        </div>
+
+                                    {% else %}
+                                        <div class="unautorized">
+                                            <b>{{totalExpenses.sumUserAnnualExpenses(user.id,year.id)}}</b> kn
+                                        </div>
+                                    {% endif %}
+
+                                {% else %}
+                                        <div class="unautorized" style="font-weight:normal">
+                                             neobjavljen
+                                        </div>
+
+                                {% endif %}
+                            
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+              
+            {% endif %}
+
+{% block javascript %}
+    <script src="/js/plans.js"></script>
+{% endblock %}
+        
+{% endblock %}

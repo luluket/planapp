@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block title %} Lista Produkata {% endblock %}
+{% block body %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/products.css"/>
+    <header>
+        <div class="note">LISTA DOSTUPNIH STAVKI</div>
+        <div id="search-container">
+            <i class="fa fa-search search-icon"></i>
+            <input type="text" id="search-box" placeholder="Traži">
+        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="/product/newCpv" class="btn btn-primary fa fa-plus"> Dodaj stavku na tržište</a>
+        {% endif %}
+        
+    </header>
+    {% if cpvs %}
+    
+        <table id="cpvs" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Kod</th>
+                    <th>Opis</th>
+                    <th>Akcije</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cpv in cpvs %}
+                    <tr>
+                        <td>{{cpv.code}}</td>
+                        
+                        <td>
+                            <span class="description">{{cpv.description}}</span>
+                        </td>
+                        
+                        <td>
+                            <a href="/products/{{cpv.id}}" class="btn btn-dark">Prikaži</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="/products/editCpv/{{cpv.id}}" class="btn btn-light">Uredi</a>
+                                <a href="/products/#" class="btn btn-danger delete-article" data-id="{{cpv.id}}">Izbriši</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+    {% else %}
+        <p>Nema stavki za prikaz</p>
+    {% endif %}
+
+{% block javascript %}
+    <script src="/js/products.js"></script>
+
+{% endblock %}
+
+{% endblock %}

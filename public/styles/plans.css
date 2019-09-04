@@ -1,0 +1,62 @@
+.hidden{
+    display:none;
+}
+
+body{
+    margin:10em;
+}
+
+header{
+    background-color: #436a90;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 0.5em;
+    height:51px;
+
+    position: fixed;
+    top: 75;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+#search-container, .list {
+    background-color: white;
+    padding: 0.25em;
+    border-radius:25px;
+    width:240px;
+    margin-right:70px;
+}
+
+#search-container .search-icon {
+    color: black;
+}
+
+#search-box {
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color:black;
+}
+
+.sum{
+    border:2px solid;
+    border-top:2px solid !important;
+    background-color:lightgrey;
+    font-size:16px;}
+
+.note{
+    position:relative;
+    right:135px;color:#fff;
+    font-size:16px;
+    font-weight:bold;
+}
+.autorized{
+    color:green;}
+.unautorized{
+    color:red;}
+
+ 

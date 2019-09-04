@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="/styles/navbar.css"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" height="75">
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
+<div class="container">
+    <a href="/profile" class="navbar-brand">SUSTAV JAVNE NABAVE</a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+        <span class="navbar-toggle-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mobile-nav">
+        <ul class="navbar-nav ml-auto">
+            <li  class="nav-item">
+                <a href="/products" class="nav-link">LISTA STAVKI</a>
+            </li>
+            <li class="nav-item">
+                <a href="/plans" class="nav-link">PREGLED PLANOVA NABAVE</a>
+            </li>
+            <li class="nav-item">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="/registarUgovora" class="nav-link">REGISTAR UGOVORA</a>
+                {% else %}
+                    <a href="/newPlan/{{app.user.id}}" class="nav-link">NOVI PLAN NABAVE</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="mobile-nav-2">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class= "logged-in">
+                Dobrodošli, <b>{{ app.user.username }}</b> !
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/profile" id="profile_opener" class="btn btn-primary mt-2 fa fa-user"> Profil</a>
+                </li>
+                <li class="nav-item" >
+                    <button type="button" id="sign_out" name="sign_out" class="btn btn-primary mt-2 fa fa-sign-out" aria-hidden="true" >Odjava</button>
+                </li>
+            </ul>
+        {% endif %}
+                
+    </div>
+    
+</div>
+</nav>
+
+
+
+{% block javascripts %}
+    <script src="/js/navbar.js">
+    </script>
+{% endblock %}

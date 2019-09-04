@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+{% block body %}
+
+
+<link rel="stylesheet" href="/styles/profile.css"/>
+
+<div class="cover-photo">
+    <img src="/images/fesb_cover.jpg"/>
+</div>
+<div class="profile-card-logo-balance">
+    <div class="profile-card-logo">
+        <div class="profile-card">
+            <img src="{{app.user.profilePicPath}}"/>
+        </div>
+        <div class="logo">
+            <img src="/images/logo.jpg">
+        </div>
+    </div>
+    <div class="balance">{% if is_granted('ROLE_USER') %}Raspoloživo: <b>{{app.user.balance}}</b> kn{% endif %}</div>
+</div>
+{% if response != NULL %}
+    Vaš plan nabave za sljedeću godinu je kreiran i stoga nije moguće kreirati novi
+{% endif %}
+<div class="user-info-plans">
+    <div class="user-info">
+        <span class="function">{{app.user.function}}</span><br>
+        <span class="fullname">{{app.user.fullname}}</span><br>
+        {% if app.user.position != '' %}<span class="position">{{app.user.position}}</span><br> {% endif %}
+        <span class="email">{{app.user.email}}</span><br>
+        {% if app.user.room !='' %} <span class="room">{{app.user.room}}</span><br> {% endif %}
+        {% if app.user.phone != '' %} <span class="phone">{{app.user.phone}}</span><br> {% endif %}
+    </div>
+    {% if is_granted('ROLE_USER')  %}
+    <table id="plans" class="table table-striped">
+        
+            <thead>
+                <tr>
+                    <th>Planovi</th>
+                    <th>Opcije</th>
+                </tr>
+            </thead>
+            <tbody>
+                    {% for year in years %}
+                    <tr>
+                        <td>Plan nabave {{year.kalendarskaGodina}}</td>
+                        <td>
+                            {% if totalExpenses.sumUserAnnualExpenses(app.user.id,year.id) > 0 %}
+                                <a href="/showPlan/{{app.user.id}}/{{year.id}}" class="btn btn-dark">Prikaži </a>
+                            {% else %}
+                                neobjavljen
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                
+            </tbody>
+    </table>
+    
+    <hr>
+    {% else %}
+        <p class="no-plans"> Nemate izvršenih planova nabave</p>
+    {% endif %}
+    
+</div>
+<br><br><h1>Ostali korisnici sustava</h1><br>
+
+    <div class="users-container">
+        {% if users %}
+            {% for user in users %}
+                <div class="user">
+                    {% if user.username != app.user.username %}
+                        <div class="colleagues-card">
+                            <img src="{{user.profilePicPath}}"/>
+                        </div>
+                        <div class="user-info">
+                            <span class="function">{{user.function}}</span><br>
+                            <span class="fullname">{{user.fullname}}</span><br>
+                            {% if user.position != '' %}<span class="position">{{user.position}}</span><br> {% endif %}
+                            <span class="email">{{user.email}}</span><br>
+                            {% if user.room !='' %} <span class="room">{{user.room}}</span><br> {% endif %}
+                            {% if user.phone != '' %} <span class="phone">{{user.phone}}</span><br> {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
+
+{% endblock %}

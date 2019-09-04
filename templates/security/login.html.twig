@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="/styles/login.css">
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Prijava</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<style>
+
+</style>
+
+<body>
+<style>
+
+
+</style>
+<div class="system_name">
+    <h1>S U S T A V</h1>   <h1>J A V N E</h1>   <h1>N A B A V E</h1>
+</div>
+<div class="authorization_message">
+     Molimo prijavite se za nastavak!
+</div>
+
+<div class="login-box">
+    <h1>Prijava </h1>
+
+    {% if error %}
+        <span class="error">{{error.messageKey}}</span>
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="POST">
+
+        <div class="textbox">
+
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input type="text" name="_username" value="{{last_username}}" placeholder="Korisničko ime">
+            
+        </div>
+
+        <div class="textbox">
+
+            <i class="fa fa-lock" aria-hidden="true"></i>
+            <input type="password" name="_password" placeholder="Lozinka" >
+
+        </div>
+
+        <button type="submit" class="fa fa-sign-in" aria-hidden="true"> Prijavi se</button>
+
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+    .cover-photo img{
+        width:100%;
+        height:270px;
+    }
+    .profile-card-logo-balance{
+        display:flex;
+        justify-content:space-between;
+    }
+    .profile-card-logo{
+        display:flex;
+        justify-content:space-between;
+    }
+    .profile-card{
+        width:200px;
+        height:200px;
+        border-radius:3px;
+        border:3px solid #ccc;
+        position:relative;
+        left:30px;
+        top:-70px;
+    }
+    .profile-card img{
+        width:100%;
+        height:100%;
+    }
+    .logo{
+        width:350px;
+        height:100px;
+        position:relative;
+        left:40px;
+        top:10px;
+    }
+    .logo img{
+        width:100%;
+        height:100%;
+    }
+    .balance{
+        font-size:40px;
+    }
+    .user-info-plans{
+        display:flex;
+    }
+    .user-info{
+        width:280px;
+    }
+    .email{
+        color:#194baa;
+    }
+    .no-plans{
+        font-size:40px;
+    }
+    .function{
+        text-transform:uppercase;
+    }
+    .users-container{
+        display:flex;
+        justify-content:flex-start;
+    }
+    .user{
+        display:inline-block;
+    }
+    .colleagues-card{
+        width:265px;
+        height:265px;
+        border-radius:3px;
+        border:3px solid #ccc;
+    }
+    .colleagues-card img{
+        width:100%;
+        height:100%;
+    }
+    

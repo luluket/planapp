@@ -1,0 +1,25 @@
+.sum{
+    color:black;
+    border:2px solid black;
+    border-top:2px solid black !important;
+    background-color:lightgrey;
+    font-size:16px;
+}
+
+.note{
+    position:relative;
+    right:165px;color:#fff;
+    font-size:16px;
+    font-weight:bold;
+}
+.empty{
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+}
+.autorized{
+    color:green;
+}
+.unautorized{
+    color:red;
+}

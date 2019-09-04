@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+{% block title %} Plan Nabave {% endblock %}
+{% block body %}
+    
+        <link rel="stylesheet" href="/styles/showPlan.css"/>
+        <style>
+            .btn-dark{margin-bottom:2px;width:64.44px;}
+            table{width:100%;}
+        </style>
+    {% if planObjects != NULL %}
+    <div class="description">
+        Prikazan je plan nabave za <b>{{year.kalendarskaGodina}}</b> godinu <br><br>
+
+        Izvršitelj: <b>{{user.function}}</b><br>
+    
+        Status: <b>{{status}}</b>
+
+        {% if status == 'izvršen' %}
+             ✅ <br>Potrošeno sredstava:<b> {{expenses}} kn</b>
+        {% else %} 
+            <br>Rezervirano sredstava:<b> {{expenses}} kn</b><br>
+
+            {% if expenses > user.balance %}
+                
+                {% if is_granted('ROLE_ADMIN') %}
+                    Raspoloživ iznos izvršitelja: <b style="color:red">{{user.balance}}</b> kn<br><br>
+                    <a href="/registarUgovora" id="rej-button" class="btn btn-danger" year="{{year.id}}" user="{{user.id}}">Odbij</a>
+                {% endif %}
+
+            {% else %}
+                
+                {% if is_granted('ROLE_ADMIN') %}
+                    Raspoloživ iznos izvršitelja: <b>{{user.balance}}</b> kn<br><br>
+
+                    <a href="/showPlan/{{user.id}}/{{year.id}}/#" id="auth-button" class="btn btn-success" expense="{{expenses}}" year="{{year.id}}" user="{{user.id}}">Odobri</a>
+                    <a href="/registarUgovora" id="rej-button" class="btn btn-danger" year="{{year.id}}" user="{{user.id}}">Odbij</a>
+                {% endif %}
+
+            {% endif %}
+
+        {% endif %}
+         
+    </div>
+    <br>
+    <table id="plan" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Evidencijski broj nabave</th>
+                    <th>Predmet nabave</th>
+                    <th>CPV</th>
+                    <th>Procijena vrijednost nabave</th>
+                    <th>Vrsta postupka</th>
+                    <th>Posebni režim nabave</th>
+                    <th>Podijeljen na grupe</th>
+                    <th>Ugovorni/okvirni sporazum</th>
+                    <th>Planirani početak</th>
+                    <th>Planirano trajanje ugovora</th>
+                    <th>Napomena</th>
+                    {% if status == 'objavljen' and user.id == app.user.id %}
+                        <th>Opcije</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            
+                {% for planObject in planObjects %}
+                    <tr>
+                        <td>{{planObject.evidencijskiBroj}}</td>
+                        <td>{{planObject.getCpv().description}}</td>
+                        <td>{{planObject.getCpv().code}}</td>
+                        <td>{{planObject.procijenjenaVrijednost}} kn</td>
+                        <td>{{planObject.vrstaPostupka}}</td>
+                        <td>{{planObject.posebniRezimNabave}}</td>
+                        <td>{{planObject.podijeljenNaGrupe}}</td>
+                        <td>{{planObject.sporazum}}</td>
+                        <td>{{planObject.planiraniPocetak}}</td>
+                        <td>{{planObject.planiranoTrajanje}}</td>
+                        <td>{{planObject.napomena}}</td>
+                    {% if status == 'objavljen' and planObject.getUser().id == app.user.id %}
+                        <td>
+                            <a href="/editPlanObject/{{planObject.id}}/{{user.id}}/{{year.id}}" class="btn btn-dark">Uredi</a>
+                            <a href="/showPlan/{{user.id}}/{{year.id}}" class="btn btn-danger" user-id="{{user.id}}" year-id="{{year.id}}" data-id="{{planObject.id}}">Izbriši</a>
+                        </td>
+
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <h1> Nemate objavljenih planova nabave</h1>
+        {% endif %}
+        <hr>
+        
+        <div class="previous">
+            <a href="/plans">Popis planova</a>
+            <a href="/profile">Profil</a>
+        </div>
+        
+
+
+{% block javascript %}
+    <script src="/js/showPlan.js"></script>
+    
+{% endblock %}
+
+{% endblock %}
+

@@ -1,0 +1,31 @@
+.alert{color:red;font-size:40px;position:absolute;top:38%; left:50%; transform: translate(-50%, -50%);}
+    .previous_page{color:blue;font-size:25px;position:absolute;top:48%; left:50%; transform: translate(-50%, -50%);}
+    body{margin:10em;}
+    header {
+    background-color: #436a90;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 0.5em;
+    height:51px;
+
+    position: fixed;
+    top: 75;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.note{
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+}
+.form-control{
+    width:50%;
+    margin-bottom:5px;
+}
+.choice-field{
+    width:25%
+}

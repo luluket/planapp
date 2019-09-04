@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %} Nova Stavka {% endblock %}
+{% block body %}
+    <style>
+        .form-control{
+            margin-bottom:5px;
+        }
+    </style>
+    
+    
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    {{form_end(form)}}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+.description{
+    font-size:25px;
+    margin-bottom:10px;
+}
+.previous{
+    display:flex;
+    justify-content:space-between;
+}
+.previous_page{
+    color:blue;
+    font-size:25px;
+    position:absolute;
+    top:48%;
+    left:50%;
+    transform:
+    translate(-50%, -50%);
+}
+.btn-success{
+    margin-right:20px;
+}
+.btn-dark{
+    margin-bottom:2px;
+    width:64.44px;
+}

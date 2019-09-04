@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %} Nova Stavka {% endblock %}
+{% block body %}
+
+    <link rel="stylesheet" href="/styles/newPlan.css"/>
+
+    
+</style>
+    <header>
+        <div class="note">GENERIRALI STE ZAHTJEV ZA PLANOM NABAVE</div>
+    </header>
+    <table class="table table-striped">
+        <thead>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Godina:</td>
+            <td>{{ "now"|date("Y")+1 }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Datum unosa:</td>
+            <td>{{ "now"|date('d-m-Y H:i:s') }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td>U pripremi</td>
+            <td></td>
+        </tr>
+        <tbody>
+    </table>
+    
+    
+    
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    {{form_end(form)}}
+
+{% endblock %}
